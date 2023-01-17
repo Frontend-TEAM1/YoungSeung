@@ -1,6 +1,6 @@
 # YoungSeung
 
-##2023-01-17
+#2023-01-17
 리액트 복습(https://www.youtube.com/watch?v=6GECT2Jrr_g) 유튜브 참조
 
 복습내용
