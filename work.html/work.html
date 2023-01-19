@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+    <style>
+      .content {
+        width: 1024px;
+      }
+
+      .disp {
+        height: 200px;
+        border: 1px solid black;
+      }
+
+      .tab_host {
+        display: flex;
+        margin-top: 20px;
+        text-align: center;
+      }
+
+      .tab:hover {
+        cursor: pointer;
+      }
+
+      .tab {
+        width: 200px;
+        border: 1px solid #ededed;
+      }
+
+      #list {
+        border: 1px solid #ededed;
+      }
+
+      #te_input {
+        width: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="content">
+      <div class="disp" id="display">
+        <form>
+          <p>1.페이지가 로딩 될 때 이곳의 글씨를 변경하시오.</p>
+        </form>
+      </div>
+
+      <p>2.탭을 선택하면 선택한 탭의 배경과 글자의색이 바뀌도록 하시오</p>
+      <div class="tab_host">
+        <div class="tab">탭1</div>
+        <div class="tab">탭2</div>
+        <div class="tab">탭3</div>
+        <div class="tab">탭4</div>
+        <div class="tab">탭5</div>
+      </div>
+
+      <p>
+        3. 위의 탭 클릭시 아래의 컨텐츠중 탭과 숫자가 같은 것만 보이게 하시오.
+      </p>
+      <div class="tab_body">
+        <div class="block">탭1 컨텐츠</div>
+        <div class="block">탭3 컨텐츠</div>
+        <div class="block">탭2 컨텐츠</div>
+        <div class="block">탭5 컨텐츠</div>
+        <div class="block">탭4 컨텐츠</div>
+      </div>
+      <p>
+        4. 아래의 입력창에 숫자가 입력되지 않도록 하고 길이 제한은 10자로
+        하시오. <br />숫자가 입력된다면 숫자가 입력되었다고 alert로 알려주시오
+      </p>
+      <input
+        type="text"
+        id="te_input"
+        maxlength="9"
+        placeholder="글자만 입력하세요."
+      />
+
+      <p>
+        5.아래의 입력창에 입력 후 저장 버튼을 누르거나 엔터키를 누르면 입력한
+        내용이 아래의 list에 추가 되도록 하시오. <br />초기화 버튼을 누르면
+        list안의 모든 내용이 지워져야 함
+      </p>
+      <h5>6.추가된 내용을 수정할 수 있게 변경하시오.</h5>
+      <form id="form">
+        <input type="text" value="" width="600" id="list_data" name="content" />
+        <button type="submit" id="send" value="show_view">저장</button>
+        <button onclick="reset_list()" type="reset">초기화</button>
+        <p>리스트</p>
+        <ul id="list">
+          <li class="liclass">list</li>
+          <li class="liclass">list</li>
+        </ul>
+      </form>
+    </div>
+  </body>
+  <script>
+    // 1번문제
+    const $first = document.querySelector('#display');
+    $first.children[0].children[0].innerText = '변경'
+    $first.children[0].children[0].style.color = 'red';
+
+    // 2번문제
+    let text = '';
+    const $second = document.querySelector('.tab_host');
+    [...$second.children].forEach((el, idx)=>{
+      el.addEventListener('click', change);
+    })
+
+    function change(){
+      for(let el of $second.children){
+        // 일단 돌면서 전부 초기화시켜주고
+        el.style.color = '';
+        el.style.backgroundColor = '';
+        // 그중에 내가 클릭한 엘리멘트에 접근
+        if(el == this){
+          el.style.color = 'white';
+          el.style.backgroundColor = 'black';
+          // 3번 문제의 innerText와 비교할때 사용하기 위헤
+          text = `${this.innerText} 컨텐츠`
+
+          // 3번 visible 함수 호출
+          visible();
+        }
+      }
+    }
+
+    // 3번 문제
+    function visible(){
+      const $third = document.querySelector('.tab_body');
+      for(let el of $third.children){
+        el.style.visibility = 'hidden';
+        if(el.innerHTML == text){
+          el.style.visibility = 'visible';
+        }
+      }
+    }
+
+    // 4번 문제
+    const $fourth = document.querySelector('#te_input');
+    $fourth.addEventListener('keypress', check);
+
+    function check(){
+      let {key, keyCode} = event;
+      if(keyCode>48 && keyCode < 57){
+        alert('숫자를 입력했습니다');
+        event.returnValue = false;
+        if(confirm('입력값을 지울까요?')){
+          $fourth.value = '';
+        }
+      }
+    }
+
+
+    // 5번 문제 저장버튼
+    const editBtn = `<button onclick='onEdit(this)'>수정</button>`;
+    const saveBtn = `<button onclick='onDelete(this)'>삭제</button>`;
+    const $form = document.getElementById('form');
+    const $list = document.querySelector('#list');
+    const $inputText = document.getElementById('list_data');
+    const $send = document.querySelector('#send');
+    $form.addEventListener('submit', add);
+    function add(){
+      event.preventDefault();
+      if($inputText.value == '') return;
+      const li = document.createElement('li');
+     
+      li.innerHTML = $inputText.value + editBtn + saveBtn;
+      $list.append(li);
+    }
+
+    // 5번문제 초기화버튼
+    function reset_list(){
+      $list.innerHTML = '';
+    }
+
+    // 6번 수정
+    function onEdit(e){
+      const parent = e.parentNode;
+      const parentText = parent.childNodes[0];
+      parent.innerHTML = `<input value=${parentText.data}><button onclick="onSave(this)">저장</button>`;
+    }
+
+    // 6번 저장
+    function onSave(e){
+      e.parentNode.innerHTML = e.parentNode.childNodes[0].value + editBtn + saveBtn;
+    }
+
+    // 6번 삭제
+    function onDelete(e){
+      const parentNode = e.parentNode;
+      parentNode.remove();
+    }
+  </script>
+</html>
