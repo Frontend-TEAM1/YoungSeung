@@ -1,0 +1,1 @@
+// a = 2.22 를 typeof(a)를하면 a 는 number타입이기때문에 boolean은 틀렸다
