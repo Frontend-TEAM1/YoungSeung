@@ -1,0 +1,51 @@
+first class citizen(일급객체 혹은 일급시민)
+    val = 1
+    1은 변수의 값이 될 수 있나?? 있다 => 그러면 1은 프로그래밍 세계에서 1급시민
+    val = if(){}
+    조건문은 변수의 값이 될 수 있냐?? 없다 => 그러면 2급시민
+    val = functnion(){}
+    조건문은 변수의 값이 될 수 있냐?? 있다 => 숫자처럼 1급시민
+    function fn(){
+        val = functino(){...}
+        return val;
+    }
+    함수가 다른 함수의 리턴값이 될 수 있다면? =>  그 언어는 함수를 1급 시민으로 대우해 주고 있는것
+
+    ex)
+        val = function(🐏){
+            return 🐓
+        }
+
+        function fn(arg){       // arg라는 파라미터를 받고 함수 안에서 파라미터를 함수로서 호출
+            arg();
+        }
+
+        fn(val)     // val이 fn의 입력값으로 들어감 => 다른 함수에 의해서 나중에 호출 => CALLBACK FUNCTION
+
+
+    words = ['srpay', 'limit', 'elite', 'exuberant', 'destruction', 'present'];
+    words.filter();
+
+    function callback(element){
+        console.log(element);
+        if(element.length>6){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    words.filter(callback);
+
+    그럼 똑같은기능을 하는 myfilter 함수를 직접 만들어보자
+
+    words.myfilter(words, element=>element.length > 6);
+    
+    function myfilter(arr, callback){
+        for(let i=0; i < arr.length; i++){
+            let result = [];
+            let current = arr[i];
+            if(callback(current)>6){
+                result.push(current);
+            }
+        }
+    }
