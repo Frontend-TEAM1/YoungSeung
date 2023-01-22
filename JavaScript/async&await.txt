@@ -1,0 +1,89 @@
+timer(1000, function(){         // 1초후에 두번째 매개변수인 콜백함수를 실행하는 타이머라는 함수
+    console.log('작업');
+    timer(1000, function(){
+        console.log('작업');    // 콜백안에 콜백이 들어가는 콜백지옥이 비동기 작업에서 흔하게 발생
+    });
+});
+
+이런 문제를 극복하기 위해 나온것이 promise
+timer(1000)
+    .then(function(){
+        console.log('작업')
+        return timer(1000);
+    })
+    .then(function(){
+        console.log('작업')
+        return timer(1000);
+    })
+    .them(function(){
+        console.log('작업')
+    })
+
+여기서 만족하지 않았다...
+
+timer(1000)
+
+console.log('작업')
+
+timer(1000)
+
+console.log('작업')
+
+...
+
+마치 동기적으로 작동하는것처럼 보이게 하기를 꿈꾼다
+
+1. 함수가 실행되기를 기다려라(비동기적인 함수앞에)=> await를 붙이자
+2. await가 붙어있는 promise를 리턴하는 함수는 다른 함수 안에서 실행되야한다. 그리고 async 가 붙어있어야한다
+async function run(){
+    await timer(1000)
+
+    console.log('작업')
+
+    await timer(1000)
+
+    console.log('작업')
+
+    ...
+}
+
+run();
+
+-----------------------------------------------------------
+
+function timer(time){
+    return new Promise(function(resolve){
+        setTimeout(function(){
+            resolve(time);
+        }, time);
+    });
+}
+
+console.log('start');
+timer(1000).then(function(time){
+    console.log('time:' + time);
+    return timer(time+1000);
+}).then(function (time){
+    console.log('time:' + time);
+    return timer(time+1000);
+    console.log('end');
+})
+
+바로 위의 문법을 밑으로 바꿈
+-----------------------------------------------------------
+
+async function run(){
+    console.log('start');
+    let time = await timer(1000);       // then의 매개변수 time을 리턴값으로 받ㅇ을수있음
+    console.log('time:'+time);
+    time = await timer(time+1000);
+    console.log('time:'+time);
+    time = await timer(time+1000);
+    console.log('time:'+time);
+    console.log('end');
+}
+console.log('parent start');
+async function run2(){
+    await run();
+    console.log('parent end');
+}
