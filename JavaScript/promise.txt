@@ -34,3 +34,48 @@ promise사용하는 이유
 비동기적인 작업을 처리할 때 그 작업이 성공, 실패했는지 표준화된 방식을 기용해서 처리해준다
 성공 = then(함수)
 실패 = catch(함수)
+
+---------------------------------------------------------------------------------------------
+
+## 내가만든 프로미스 (위에는 남이 만든 프로미스)
+
+function job1(){
+        return new Promise(function(resolve, reject){
+        setTimeout(function(){
+            resolve('job1 ok!');
+        }, 2000);
+    });
+}
+
+
+성공했는지 실패했는지에 대한 콜백함수 공급(resolve와 reject라고 관습적으로 많이씀 다른이름이여도 상관은없음)
+
+
+function job2(){
+        return new Promise(function(resolve, reject){
+        setTimeout(function(){
+            resolve('job2 ok!');
+        }, 2000);
+    });
+}
+
+
+// then 안에 또 then (Nested 방식)
+
+job1().then(function(data){
+    console.log('data1', data);
+    job2().then(function(data){
+        console.log('data2', data)
+    })
+})
+
+// 체이닝 방식
+job1()
+    .then(function(data){
+        console.log('data1', data);
+        return job2();
+        // job2는 프로미스를 리턴하니 then사용이 가능
+    })
+    .then(function(data){
+         console.log('data2', data);
+    })
