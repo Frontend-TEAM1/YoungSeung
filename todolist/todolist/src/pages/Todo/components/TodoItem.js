@@ -1,9 +1,10 @@
 import React from 'react';
 
-function TodoItem(item) {
+function TodoItem(props) {
+
   return (
     <React.Fragment>
-      <div>{item.item}</div>
+      <div>{props.item}</div>
     </React.Fragment>
   );
 }

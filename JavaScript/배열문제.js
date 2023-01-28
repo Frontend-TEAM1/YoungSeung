@@ -35,7 +35,7 @@ console.log(num);
 console.log(arr);
 
 // splice를 활용함면 뺀 요소를 배열로 반환해준다
-let splice = arr.splice(arr.length - 1, 1);
+let splice = arr.splice(arr.length - 1, 1); // [29]
 console.log(arr);
 
 // shift, unsfhit 활용하여 맨 앞의 요소를 삭제하거나 추가가능(unshift가 추가이고, shift가 삭제)

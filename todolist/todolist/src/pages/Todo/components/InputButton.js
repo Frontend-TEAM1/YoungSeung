@@ -9,7 +9,6 @@ function InputButton() {
     const change = (e)=>{
         setInputText(e.target.value);
     }
-    
 
     const [list, setList] = useState([]);
 

@@ -72,7 +72,7 @@ let group = {
  
   showList() {
     this.students.forEach( // this === group
-      function(student) { alert(this.title + ': ' + student) } // this ==== window
+      function(student) { alert(this.title + ': ' + student) } // this === window
     );
   }
 };
