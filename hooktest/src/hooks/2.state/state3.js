@@ -1,7 +1,7 @@
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import ProductCard from "../../components/2.state/product";
-import productList from "../../__mock__/products.json";
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import ProductCard from '../../components/2.state/product';
+import productList from '../../__mock__/products.json';
 
 function State3() {
   /*
@@ -44,8 +44,8 @@ function State3() {
 
   const navigate = useNavigate();
 
-  const onNavigateDetailPage = () => {
-    navigate(`/state/detail/1`);
+  const onNavigateDetailPage = (productNumber) => {
+    navigate(`/state/detail/${productNumber}`);
   };
 
   return (
@@ -55,7 +55,13 @@ function State3() {
       <ul>
         {/* list */}
         {/* 예시 데이터 */}
-        <ProductCard onNavigate={onNavigateDetailPage} />
+        {productList.products.map((item) => {
+          return (
+            <>
+              <ProductCard detail={item} onNavigate={onNavigateDetailPage} />
+            </>
+          );
+        })}
       </ul>
     </>
   );
@@ -68,6 +74,7 @@ const Item = styled.li`
   width: 300px;
   margin: 16px auto;
 `;
+
 
 const S = {
   Item,

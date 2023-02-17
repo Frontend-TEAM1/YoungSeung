@@ -26,6 +26,7 @@ function State2() {
     },
     Comments: [
       {
+        id: 1,
         User: {
           nickname: '김사과',
         },
@@ -33,6 +34,7 @@ function State2() {
         myComment: false,
       },
       {
+        id: 2,
         User: {
           nickname: '반하나',
         },
@@ -40,6 +42,7 @@ function State2() {
         myComment: false,
       },
       {
+        id: 3,
         User: {
           nickname: '오렌지',
         },
@@ -47,6 +50,7 @@ function State2() {
         myComment: false,
       },
       {
+        id: 4,
         User: {
           nickname: '이멜론',
         },
@@ -54,6 +58,7 @@ function State2() {
         myComment: false,
       },
       {
+        id: 5,
         User: {
           nickname: '박수박',
         },
@@ -76,6 +81,7 @@ function State2() {
     if (user && content) {
       const newPost = { ...post };
       const newComments = {
+        id:newPost.Comments.length+1,
         User: {
           nickname: user,
         },
@@ -86,6 +92,26 @@ function State2() {
       setPost(newPost);
     }
   };
+  
+  const handleChangeContent = (id, editContent) => {
+    const newPost = {...post};
+    const editPost = newPost.Comments.find((item)=>item.id === id);
+    editPost.content = editContent;
+    setPost(newPost);
+  }
+
+  const onDeleteBtn = (id) => {
+    if(window.confirm('삭제하겠습니까?')){
+      const newPost = {...post};
+      const delIndex = newPost.Comments.findIndex((item)=>item.id===id);
+      newPost.Comments.splice(delIndex, 1);
+      // const filterPost = newPost.Comments.filter((item)=>item.id !== id);
+      // newPost.Comments = filterPost;
+      // console.log('수정', newPost);
+      setPost(newPost);
+    }
+
+  }
 
   return (
     <S.Wrapper>
@@ -120,9 +146,9 @@ function State2() {
           return (
             <Comment
               user={user}
-              onChangeContent={onChangeContent}
               content={content}
-              setContent={setContent}
+              handleChangeContent={handleChangeContent}
+              onDeleteBtn={onDeleteBtn}
             />
           );
         })}
