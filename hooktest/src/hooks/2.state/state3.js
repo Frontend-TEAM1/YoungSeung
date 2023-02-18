@@ -3,6 +3,20 @@ import styled from 'styled-components';
 import ProductCard from '../../components/2.state/product';
 import productList from '../../__mock__/products.json';
 
+// 3자리마다 ,표시
+export const priceShow = (price) => {
+  const split = price.split('');
+  split.reverse();
+  for (let i = 0; i < split.length; i++) {
+    if (i > 0 && i % 4 === 3) {
+      split.splice(i, 0, ',');
+    }
+  }
+  split.reverse();
+  const join = split.join('');
+  return join;
+};
+
 function State3() {
   /*
     문제 3.
@@ -42,6 +56,10 @@ function State3() {
 
   console.log(productList);
 
+  // const a = '123456';
+  // console.log(a.split('').join('1'));
+  // console.log(a);
+
   const navigate = useNavigate();
 
   const onNavigateDetailPage = (productNumber) => {
@@ -58,7 +76,7 @@ function State3() {
         {productList.products.map((item) => {
           return (
             <>
-              <ProductCard detail={item} onNavigate={onNavigateDetailPage} />
+              <ProductCard priceShow={priceShow} detail={item} onNavigate={onNavigateDetailPage} />
             </>
           );
         })}
@@ -74,7 +92,6 @@ const Item = styled.li`
   width: 300px;
   margin: 16px auto;
 `;
-
 
 const S = {
   Item,

@@ -1,11 +1,11 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-function ProductCard({ onNavigate, detail }) {
+function ProductCard({ onNavigate, detail, priceShow }) {
   return (
-    <S.Item onClick={()=>onNavigate(detail.productNumber)}>
+    <S.Item onClick={() => onNavigate(detail.productNumber)}>
       <h4>{detail.productName}</h4>
       <p>상품번호: {detail.productNumber}</p>
-      <p>가격: {detail.productPrice}</p>
+      <p>가격: {priceShow(detail.productPrice)}</p>
       <p>사이즈: {detail.productSize}</p>
       <p>평점: {detail.productRating}</p>
       <p>리뷰: {detail.productReview}</p>

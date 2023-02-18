@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import { priceShow } from '../hooks/2.state/state3';
 import productList from '../__mock__/products.json';
 function DetailPage() {
   const params = useParams();
@@ -9,6 +10,7 @@ function DetailPage() {
   const [comment, setComment] = useState();
 
   const product = List.products.find((product) => product.productNumber === productNumber);
+  console.log(product);
   const {
     Review,
     productDetail,
@@ -63,7 +65,7 @@ function DetailPage() {
       <S.Content>{productDetail.productDetailInfo}</S.Content>
       <h4>{productName}</h4>
       <p>상품번호: {productNumber}</p>
-      <p>가격: {productPrice}</p>
+      <p>가격: {priceShow(productPrice)}</p>
       <p>사이즈: {productSize}</p>
       <p>평점: {productRating}</p>
       <p>리뷰: {productReview}</p>
