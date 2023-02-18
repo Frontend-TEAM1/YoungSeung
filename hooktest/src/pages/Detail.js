@@ -6,6 +6,7 @@ function DetailPage() {
   const params = useParams();
   const { productNumber } = params;
   const [List, setList] = useState(productList);
+  const [comment, setComment] = useState();
 
   const product = List.products.find((product) => product.productNumber === productNumber);
   const {
@@ -18,15 +19,35 @@ function DetailPage() {
     productSize,
   } = product;
 
-  console.log(product);
+  // console.log(List.products.find((product)=>product === product));
+  // console.log(product);
 
   const ratingStar = (rating) => {
-    let star = ''
-    const fillStar = '★'
-    const blankStar = '☆'
-    for(let i=0;i<5;i++){
-      
+    let star = '';
+    const fillStar = '★';
+    const blankStar = '☆';
+    for (let i = 0; i < rating; i++) {
+      star += fillStar;
     }
+    for (let i = 0; i < 5 - rating; i++) {
+      star += blankStar;
+    }
+    return star;
+  };
+
+  const onChangeComment = (e) => {
+    setComment(e.target.value);
+  }
+  const onCommentSubmit = () => {
+    if(!comment) return;
+    const review = {
+      reviewer: '작성자',
+      review: comment,
+      rating: Math.floor(Math.random()*6),
+    }
+    product.Review.push(review);
+    setList({...List});
+    setComment('');
   }
   return (
     <div>
@@ -47,12 +68,18 @@ function DetailPage() {
       <p>평점: {productRating}</p>
       <p>리뷰: {productReview}</p>
       {Review.map((review) => {
-        return (<S.Review>
-          <div>{review.reviewer}</div>
-          <div>{review.review}</div>
-          <div>{review.rating}</div>
-        </S.Review>);
+        return (
+          <S.Review>
+            <div>{review.reviewer}</div>
+            <div>{review.review}</div>
+            <div>{ratingStar(review.rating)}</div>
+          </S.Review>
+        );
       })}
+      <S.Comment>
+        <textarea onChange={onChangeComment} placeholder="댓글을 작성해주세요" value={comment}></textarea>
+        <button onClick={onCommentSubmit}>작성</button>
+      </S.Comment>
     </div>
   );
 }
@@ -76,18 +103,37 @@ const Content = styled.div`
 `;
 
 const Review = styled.div`
-display: flex;
-align-items: center;
-justify-content: space-between;
-width: 50%;
-margin: 20px auto;
-border: 1px solid black;
-padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 50%;
+  margin: 20px auto;
+  border: 1px solid black;
+  padding: 20px;
+`;
 
+const Comment = styled.div`
+  display: flex;
+  align-items: center;
+  width: 50%;
+  margin: 50px auto;
+  height: 15vh;
+  & > textarea {
+    width: 90%;
+    height: 100%;
+    font-size: 1.2rem;
+  }
+  & > button {
+    width: 10%;
+    height: 50%;
+    padding: 20px;
+    margin-left: 10px;
+  }
 `;
 
 const S = {
   Img,
   Content,
   Review,
+  Comment,
 };
