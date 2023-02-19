@@ -56,10 +56,6 @@ function State3() {
 
   console.log(productList);
 
-  // const a = '123456';
-  // console.log(a.split('').join('1'));
-  // console.log(a);
-
   const navigate = useNavigate();
 
   const onNavigateDetailPage = (productNumber) => {

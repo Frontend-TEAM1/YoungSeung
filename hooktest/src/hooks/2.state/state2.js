@@ -16,6 +16,7 @@ function State2() {
             3. 댓글 삭제 기능 ( 본인이 작성한 댓글만 삭제할 수 있습니다, myComment 활용 )
     */
 
+
   const [post, setPost] = useState({
     title: '안녕하세요 여러분 김성용 강사입니다 :)',
     content: '오늘도 모두 화이팅입니다!',
@@ -67,6 +68,7 @@ function State2() {
       },
     ],
   });
+
   const [user, setUser] = useState();
   const [content, setContent] = useState();
 
@@ -110,7 +112,7 @@ function State2() {
       // console.log('수정', newPost);
       setPost(newPost);
     }
-
+    
   }
 
   return (

@@ -27,6 +27,7 @@ function State1() {
 
   const onClickDeleteBtn = () => {
     const item = playList.findIndex((item) => item.title.toLowerCase() === titleInput.toLowerCase());
+    if(item === -1) return;
     playList.splice(item, 1);
     setPlayList([...playList]);
   };
