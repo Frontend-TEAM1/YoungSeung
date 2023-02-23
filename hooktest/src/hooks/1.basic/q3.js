@@ -39,7 +39,7 @@ function Q3() {
       <h1>문제3</h1>
       <div>
         <p> 줄넘기 횟수 : {count} </p>
-        {Q3State && <Q3components count={count} setCount={setCount} />}
+        {Q3State && <Q3components setCount={setCount} />}
         <p>
           <button onClick={onStartBtn}>줄넘기 시작</button>
         </p>

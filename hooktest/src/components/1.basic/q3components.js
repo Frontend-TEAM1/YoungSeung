@@ -13,7 +13,6 @@ function Q3components({ count, setCount }) {
   }, []);
   return (
     <>
-      <p> 줄넘기 횟수 : {count} </p>
       <div> 🏃‍♂️ 줄넘기 ... ing </div>
     </>
   );

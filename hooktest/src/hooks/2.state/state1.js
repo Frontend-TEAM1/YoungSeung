@@ -1,13 +1,17 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import PlayListMock from '../../__mock__/playList.json';
 
 function State1() {
   const [playList, setPlayList] = useState(PlayListMock.playlist);
   const [titleInput, setTitleInput] = useState('');
   const [artistInput, setArtistInput] = useState('');
+  const value = useRef('');
 
   const onChangeInputTitle = (e) => {
-    setTitleInput(e.target.value);
+    // setTitleInput(e.target.value);
+    // console.log(e.target.value);
+    // value=e.target.value
+    console.log(value.current.value);
   };
 
   const onChangeInputArtist = (e) => {
@@ -61,7 +65,7 @@ function State1() {
       </ul>
       <div>
         <p>
-          곡명 : <input onChange={onChangeInputTitle} value={titleInput} />
+          곡명 : <input ref={value} onChange={onChangeInputTitle} />
         </p>
         <p>
           가수/작곡 : <input onChange={onChangeInputArtist} value={artistInput} />

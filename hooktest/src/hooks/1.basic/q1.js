@@ -40,19 +40,22 @@ function Q1() {
     }
   }, [Q1Input]);
 
-
   // Q2.
   const [Q2State, setQ2State] = useState(false);
-  const [Q2Btn, setQ2Btn] = useState('보이기');
+  // 불필요하게 스테이트로 관리를 해줄필요가 없다.(캐싱 메모리를 차지하기 때문)
+  // const [Q2Btn, setQ2Btn] = useState('보이기');
+  const Q2Btn = Q2State ? '보이기' : '숨기기';
 
   const onChangeShowState = () => {
-    setQ2State((prev)=>!prev);
-    if(Q2Btn === '보이기'){
-      setQ2Btn('숨기기')
-    }else{
-      setQ2Btn('보이기');
-    }
-  }
+    // 이부분에 그냥 Q2State를 변경해주고 그에따라 Q2Btn의 문자가 바뀌게 설정해주면 된다
+    //   setQ2State((prev)=>!prev);
+    //   if(Q2Btn === '보이기'){
+    //     setQ2Btn('숨기기')
+    //   }else{
+    //     setQ2Btn('보이기');
+    //   }
+    setQ2State((prev) => !prev);
+  };
 
   return (
     <>
@@ -74,7 +77,7 @@ function Q1() {
 
       <div>
         <h2>문제1-2. </h2>
-        <button onClick={onChangeShowState}>{Q2State ? Q2Btn : Q2Btn}</button>
+        <button onClick={onChangeShowState}>{Q2Btn}</button>
         {Q2State && <p> 이 문구는 보이기 상태일 때만 볼 수 있습니다 </p>}
       </div>
     </>
