@@ -3,25 +3,29 @@ import PlayListMock from '../../__mock__/playList.json';
 
 function State1() {
   const [playList, setPlayList] = useState(PlayListMock.playlist);
-  const [titleInput, setTitleInput] = useState('');
-  const [artistInput, setArtistInput] = useState('');
-  const value = useRef('');
+  // 스테이트로 input값을 해줄 필요가없다
+  // 실시간으로 랜더링을 해줄이유가 없음(불필요한 랜더링이 발생)
+  // const [titleInput, setTitleInput] = useState('');
+  // const [artistInput, setArtistInput] = useState('');
+  const titleValue = useRef('');
+  const artistValue = useRef('');
 
   const onChangeInputTitle = (e) => {
+    // 기존의 onChange를 통한 setInput은 불필요한 렌더링이 일어난다.
     // setTitleInput(e.target.value);
-    // console.log(e.target.value);
-    // value=e.target.value
-    console.log(value.current.value);
+    // console.log(titleValue.current.value)
   };
-
+  
   const onChangeInputArtist = (e) => {
-    setArtistInput(e.target.value);
+    // 기존의 onChange를 통한 setInput은 불필요한 렌더링이 일어난다.
+    // setArtistInput(e.target.value);
+    // console.log(artistValue.current.value)
   };
 
   const onClickAddBtn = () => {
-    const title = titleInput;
-    const signer = artistInput;
-    if(!title || !signer) return;
+    const title = titleValue.current.value;
+    const signer = artistValue.current.value;
+    if (!title || !signer) return;
     const newObj = {
       title,
       signer,
@@ -30,8 +34,10 @@ function State1() {
   };
 
   const onClickDeleteBtn = () => {
-    const item = playList.findIndex((item) => item.title.toLowerCase() === titleInput.toLowerCase());
-    if(item === -1) return;
+    const item = playList.findIndex(
+      (item) => item.title.toLowerCase() === titleValue.current.value.toLowerCase()
+    );
+    if (item === -1) return;
     playList.splice(item, 1);
     setPlayList([...playList]);
   };
@@ -65,10 +71,10 @@ function State1() {
       </ul>
       <div>
         <p>
-          곡명 : <input ref={value} onChange={onChangeInputTitle} />
+          곡명 : <input ref={titleValue} />
         </p>
         <p>
-          가수/작곡 : <input onChange={onChangeInputArtist} value={artistInput} />
+          가수/작곡 : <input ref={artistValue} />
         </p>
         <p>
           <button onClick={onClickAddBtn}>추가</button>

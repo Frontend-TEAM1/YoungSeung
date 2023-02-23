@@ -1,16 +1,38 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { priceShow } from '../hooks/2.state/state3';
 import productList from '../__mock__/products.json';
+
+const ratingStar = (rating) => {
+  let star = '';
+  const fillStar = '★';
+  const blankStar = '☆';
+  for (let i = 0; i < rating; i++) {
+    star += fillStar;
+  }
+  for (let i = 0; i < 5 - rating; i++) {
+    star += blankStar;
+  }
+  return star;
+};
+
 function DetailPage() {
   const params = useParams();
   const { productNumber } = params;
-  const [List, setList] = useState(productList);
+  // 상품 state
+  const [product, setProduct] = useState();
+  // 댓글 state
   const [comment, setComment] = useState();
-
-  const product = List.products.find((product) => product.productNumber === productNumber);
+  useEffect(()=>{
+    // productNumber가 params로 받은 Number가 같은 product를 찾아서,
+    const product = productList.products.find((product) => product.productNumber === productNumber);
+    // 스테이트로 관리를 해준다.
+    // console.log(product);
+    setProduct(product);
+  }, [])
   console.log(product);
+
   const {
     Review,
     productDetail,
@@ -20,22 +42,6 @@ function DetailPage() {
     productReview,
     productSize,
   } = product;
-
-  // console.log(List.products.find((product)=>product === product));
-  // console.log(product);
-
-  const ratingStar = (rating) => {
-    let star = '';
-    const fillStar = '★';
-    const blankStar = '☆';
-    for (let i = 0; i < rating; i++) {
-      star += fillStar;
-    }
-    for (let i = 0; i < 5 - rating; i++) {
-      star += blankStar;
-    }
-    return star;
-  };
 
   const onChangeComment = (e) => {
     setComment(e.target.value);
@@ -48,7 +54,7 @@ function DetailPage() {
       rating: Math.floor(Math.random()*6),
     }
     product.Review.push(review);
-    setList({...List});
+    setProduct({...product});
     setComment('');
   }
   return (
@@ -62,6 +68,7 @@ function DetailPage() {
     */}
       {params.productNumber}
       <S.Img>상품이미지</S.Img>
+      <div>{product.productName}</div>
       <S.Content>{productDetail.productDetailInfo}</S.Content>
       <h4>{productName}</h4>
       <p>상품번호: {productNumber}</p>
