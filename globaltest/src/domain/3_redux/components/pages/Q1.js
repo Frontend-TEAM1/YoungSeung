@@ -1,8 +1,10 @@
-import { useState } from "react";
-import NavigateButton from "../../../../components/NavigateButton";
-import { MockPosts } from "../../../../__mock__/mockPosts";
-import PostForm from "../atom/Post/Form";
-import AllPosts from "../atom/Posts";
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import NavigateButton from '../../../../components/NavigateButton';
+import { ADD_COMMENT, ADD_POST, DELETE_COMMENT, DELETE_POST } from '../../../../store/4_redux';
+import { MockPosts } from '../../../../__mock__/mockPosts';
+import PostForm from '../atom/Post/Form';
+import AllPosts from '../atom/Posts';
 
 const ReduxQ1Page = () => {
   /* 
@@ -28,15 +30,38 @@ const ReduxQ1Page = () => {
             src/store/4_redux.js에 구현해주세요.
   */
 
-  const [Posts, setPosts] = useState(MockPosts(10));
-  const onSubmit = (e) => {
-    console.log("submit");
+  // const [Posts, setPosts] = useState(MockPosts(10));
+
+  // useSelector에서 사용하려고하는 state 꺼내쓰기
+  const Posts = useSelector((state) => state.posts);
+  // dispatcher 사용
+  const dispatch = useDispatch();
+
+  const onAddPost = (title, content) => {
+    dispatch(ADD_POST({ title, content }));
+  };
+
+  const onDeletePost = (id) => {
+    dispatch(DELETE_POST(id));
+  };
+
+  const onAddComment = (id, nickName, content) => {
+    dispatch(ADD_COMMENT({ id, nickName, content }));
+  };
+
+  const onDeleteComment = (postId, commentId) => {
+    dispatch(DELETE_COMMENT({postId, commentId}));
   };
 
   return (
     <div>
-      <PostForm onSubmit={onSubmit} />
-      <AllPosts posts={Posts} />
+      <PostForm onAddPost={onAddPost} />
+      <AllPosts
+        posts={Posts}
+        onDeletePost={onDeletePost}
+        onAddComment={onAddComment}
+        onDeleteComment={onDeleteComment}
+      />
       <NavigateButton isLastPage />
     </div>
   );

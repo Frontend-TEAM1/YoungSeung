@@ -1,6 +1,13 @@
-const CommentForm = ({ onSubmit }) => {
+const CommentForm = ({ post, onAddComment }) => {
+  const onSubmitCommentBtn = (e) => {
+    e.preventDefault();
+    const id = post.id
+    const nickName = e.target.name.value;
+    const content = e.target.content.value;
+    onAddComment(id, nickName, content);
+  }
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmitCommentBtn}>
       <label>
         <input type="text" name="name" placeholder="이름" />
       </label>

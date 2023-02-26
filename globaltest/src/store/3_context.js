@@ -35,6 +35,7 @@ const UserListReducer = (state, action) => {
       return filterList;
     default:
       window.alert('error');
+      return state;
   }
 };
 

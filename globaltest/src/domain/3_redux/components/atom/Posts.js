@@ -1,10 +1,16 @@
-import Post from "./Post/Post";
+import Post from './Post/Post';
 
-const AllPosts = ({ posts }) => {
+const AllPosts = ({ posts, onDeletePost, onAddComment, onDeleteComment }) => {
   return (
     <div>
-      {posts.map((post) => (
-        <Post key={post.id} post={post} />
+      {posts.map((post, index) => (
+        <Post
+          key={index}
+          post={post}
+          onDeletePost={onDeletePost}
+          onAddComment={onAddComment}
+          onDeleteComment={onDeleteComment}
+        />
       ))}
     </div>
   );
