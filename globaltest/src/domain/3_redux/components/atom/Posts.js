@@ -1,6 +1,6 @@
 import Post from './Post/Post';
 
-const AllPosts = ({ posts, onDeletePost, onAddComment, onDeleteComment }) => {
+const AllPosts = ({ posts, onDeletePost, onAddComment, onDeleteComment, onUpdateComment }) => {
   return (
     <div>
       {posts.map((post, index) => (
@@ -10,6 +10,7 @@ const AllPosts = ({ posts, onDeletePost, onAddComment, onDeleteComment }) => {
           onDeletePost={onDeletePost}
           onAddComment={onAddComment}
           onDeleteComment={onDeleteComment}
+          onUpdateComment={onUpdateComment}
         />
       ))}
     </div>

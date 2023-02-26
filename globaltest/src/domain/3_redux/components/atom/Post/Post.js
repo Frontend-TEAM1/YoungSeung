@@ -5,14 +5,14 @@ import Comment from '../Comment/Comment';
 import CommentForm from '../Comment/Form';
 import UserCard from '../UserCard/Card';
 
-const Post = ({ post, onDeletePost, onAddComment, onDeleteComment }) => {
+const Post = ({ post, onDeletePost, onAddComment, onDeleteComment, onUpdateComment }) => {
   const [isContentEditBtn, setIsContentEditBtn] = useState(false);
   const [editContent, setEditContent] = useState(post.content);
   const dispatch = useDispatch();
   let editContentBtn = isContentEditBtn ? '완료' : '수정';
 
   const onClickContentEditBtn = () => {
-    setIsContentEditBtn((prev) => !prev);
+    setIsContentEditBtn(true);
   };
   const onChangeEditContent = (e) => {
     setEditContent(e.target.value);
@@ -61,6 +61,7 @@ const Post = ({ post, onDeletePost, onAddComment, onDeleteComment }) => {
               postId={post.id}
               comment={comment}
               onDeleteComment={onDeleteComment}
+              onUpdateComment={onUpdateComment}
             />
           ))}
       </div>

@@ -5,6 +5,7 @@ import { MockPosts } from '../__mock__/mockPosts';
 
 const initialState = MockPosts(10);
 
+
 // 게시글 추가, 게시글 삭제, 게시글 수정
 
 export const ADD_POST = createAction('ADD_POST');
@@ -68,10 +69,16 @@ const reducer = (state = initialState, action) => {
       );
       return newPostDeleteComment;
     case 'UPDATE_COMMENT':
-      return;
+      const newPostUpdateComment = [...state];
+      const findPostUpdate = newPostUpdateComment.find((post)=>post.id === action.payload.postId);
+      const findComment = findPostUpdate.Comments.find((comment)=>comment.id === action.payload.commentId);
+      findComment.content = action.payload.editContent;
+      return newPostUpdateComment;
     default:
       return state;
   }
 };
 
 export default reducer;
+
+
