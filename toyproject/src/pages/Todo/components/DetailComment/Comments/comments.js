@@ -8,6 +8,7 @@ function Comments({ data, item, newData, setData, onDeleteBtn }) {
     const [parse, setParse] = useState(DateGap(today.getDate(), item.createdAt.getDate()));
 
   const [editComment, setEditComment] = useState(item.content);
+  
   const [editState, setEditState] = useState(false);
 
   const onClickEditBtn = () => {

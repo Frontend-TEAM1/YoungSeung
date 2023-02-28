@@ -14,7 +14,7 @@ function Diary({ data }) {
     <S.Wrapper>
       {data.map((data) => {
         return (
-          <StyledLink to={`/todo/post/${data.idx}`}>
+          <StyledLink to={`/todo/post/${data.id}`}>
             <S.Card>
               <CardTitle data={data} />
               <CardContent data={data} />

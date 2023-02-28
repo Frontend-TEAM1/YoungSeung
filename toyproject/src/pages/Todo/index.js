@@ -12,7 +12,7 @@ function TodoPage() {
 
   let { id } = useParams();
   const [newData, setData] = usePostsContext();
-  const data = newData.find((item) => item.idx == id);
+  const data = newData.find((item) => item.id == id);
 
   return (
     <>

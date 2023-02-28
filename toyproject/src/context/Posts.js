@@ -14,7 +14,8 @@ export const DateGap = (nowDate, postDate) => {
 export const today = faker.date.between('2023-01-01T00:00:00.000Z', '2023-01-31T00:00:00.000Z')
 
 
-const initialState = MockPost(5);
+const initialState = MockPost(6);
+
 
 export const PostsContext = createContext();
 

@@ -11,7 +11,7 @@ function CardTitle({ data }) {
   // console.log(data.createdAt.getDate());
   // console.log(data.createdAt.getDay());
   const [parse, setParse] = useState(DateGap(today.getDate(), data.createdAt.getDate()));
-  console.log(parse);
+  // console.log(parse);
   // console.log(today);
   return (
     <S.Wrapper>

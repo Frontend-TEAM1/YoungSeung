@@ -22,12 +22,12 @@ function DetailTitle({ data }) {
         {parse ? (
           <div>{DateGap(today.getDate(), data.createdAt.getDate())}. </div>
         ) : (
-          <>
+          <div>
             <div>{data.createdAt.getFullYear()}. </div>
             <div>{data.createdAt.getMonth() + 1}. </div>
             <div>{data.createdAt.getDate()}. </div>
             <div>{days[data.createdAt.getDay()]}. </div>
-          </>
+          </div>
         )}
       </TitleDetail>
     </S.Wrapper>
