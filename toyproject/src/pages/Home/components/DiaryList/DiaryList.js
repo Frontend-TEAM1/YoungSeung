@@ -5,21 +5,12 @@ import CardContent from './CardContent/cardContent';
 import CardTitle from './CardTitle/cardTitle';
 
 function Diary({ data }) {
-  // console.log(data);
 
-  // const navigate = useNavigate();
-
-  // console.log(data);
   return (
     <S.Wrapper>
       {data.map((data) => {
         return (
-          <StyledLink to={`/todo/post/${data.id}`}>
-            <S.Card>
-              <CardTitle data={data} />
-              <CardContent data={data} />
-            </S.Card>
-          </StyledLink>
+          <Diary />
         );
       })}
     </S.Wrapper>

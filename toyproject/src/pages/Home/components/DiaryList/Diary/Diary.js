@@ -1,29 +1,19 @@
 // import { Link, useNavigate } from 'react-router-dom';
 // import styled from 'styled-components';
 
-// function Diary({ data }) {
-//   const navigate = useNavigate();
+import { Link } from "react-router-dom";
 
-//   const onChangePage = () => {
-//     return navigate('/todo');
-//   };
-
-//   // console.log(data);
-//   return (
-//     <S.Wrapper>
-//       {data.map((data) => {
-//         // console.log(data.User.nick_name);
-//         return (
-//           <S.Card onClick={onChangePage} data={data}>
-//             <div>{data.User.nick_name}</div>
-//             <div>{data.id}</div>
-//           </S.Card>
-//         );
-//       })}
-//     </S.Wrapper>
-//   );
-// }
-// export default Diary;
+function Diary({ data }) {
+  return (
+    <StyledLink to={`/todo/post/${data.id}`}>
+      <S.Card>
+        <CardTitle data={data} />
+        <CardContent data={data} />
+      </S.Card>
+    </StyledLink>
+  );
+}
+export default Diary;
 
 // const Wrapper = styled.div`
 //   display: flex;
@@ -45,3 +35,8 @@
 //   Wrapper,
 //   Card,
 // };
+
+const StyledLink = styled(Link)`
+  color: black;
+  text-decoration: none;
+`;

@@ -5,14 +5,6 @@ import styled from 'styled-components';
 import { MockPost } from '__mocks__/post';
 import DiaryList from './components/DiaryList/DiaryList';
 
-// export const Posts = MockPost(5);
-
-// for (let i = 0; i < Posts.length; i++) {
-//   Posts[i].idx = i;
-// }
-
-// console.log(Posts);
-
 function HomePage() {
   const [data, setData] = usePostsContext();
   const [ref, inView] = useInView();
@@ -24,13 +16,6 @@ function HomePage() {
     }, 800)
   }
 
-  // useEffect(() => {
-  //   const newData = [...data];
-  //   for (let i = 0; i < newData.length; i++) {
-  //     newData[i].idx = i;
-  //   }
-  //   setData(newData);
-  // }, [inView]);
 
   useEffect(()=>{
     console.log(useInView);
