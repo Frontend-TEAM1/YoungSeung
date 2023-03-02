@@ -22,10 +22,10 @@ function CardContent({ data }) {
           modules={[Pagination]}
           className="mySwiper"
         >
-          {data.Post_img.map((src) => {
+          {data.Post_img.map((src, index) => {
             return (
               <SwiperSlide>
-                <img src={src} alt="" width={250} height={200} />
+                <img key={index} src={src} alt="" width={250} height={200} />
               </SwiperSlide>
             );
           })}

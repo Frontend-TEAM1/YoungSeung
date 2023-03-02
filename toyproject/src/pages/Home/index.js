@@ -18,7 +18,7 @@ function HomePage() {
 
 
   useEffect(()=>{
-    console.log(useInView);
+    // console.log(useInView);
     if(!inView){
       return
     }

@@ -1,5 +1,5 @@
 import { DateGap, today } from 'context/Posts';
-import { days } from 'pages/Home/components/DiaryList/CardTitle/cardTitle';
+import { days } from 'pages/Home/components/DiaryList/Diary/CardTitle/cardTitle';
 import { useState } from 'react';
 import styled from 'styled-components';
 import { flexAlignCenter } from 'styles/common';

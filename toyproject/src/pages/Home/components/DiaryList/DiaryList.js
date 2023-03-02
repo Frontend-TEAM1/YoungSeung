@@ -1,22 +1,23 @@
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { flexCenter } from 'styles/common';
-import CardContent from './CardContent/cardContent';
-import CardTitle from './CardTitle/cardTitle';
+import CardContent from './Diary/CardContent/cardContent';
+import CardTitle from './Diary/CardTitle/cardTitle';
+import Diary from './Diary/Diary';
 
-function Diary({ data }) {
+function DiaryList({ data }) {
 
   return (
     <S.Wrapper>
-      {data.map((data) => {
+      {data.map((data, index) => {
         return (
-          <Diary />
+          <Diary key={index} data={data} />
         );
       })}
     </S.Wrapper>
   );
 }
-export default Diary;
+export default DiaryList;
 
 const Wrapper = styled.div`
   ${flexCenter}
@@ -36,11 +37,6 @@ const Card = styled.div`
   &:hover {
     background-color: #f3f3f3;
   }
-`;
-
-const StyledLink = styled(Link)`
-  color: black;
-  text-decoration: none;
 `;
 
 const S = {
