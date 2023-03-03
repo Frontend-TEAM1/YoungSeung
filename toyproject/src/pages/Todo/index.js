@@ -1,5 +1,6 @@
 import { usePostsContext } from 'context/Posts';
 import { Posts } from 'pages/Home';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import DetailComment from './components/DetailComment/detailComment';
@@ -10,19 +11,25 @@ function TodoPage() {
   // let { id } = useParams();
   // console.log(id);
 
-  let { id } = useParams();
-  const [newData, setData] = usePostsContext();
-  const data = newData.find((item) => item.id == id);
-
-  return (
-    <>
-      <S.Wrapper>
-        <DetailTitle data={data} />
-        <DetailContent data={data} />
-      </S.Wrapper>
-      <DetailComment newData={newData} data={data} setData={setData} />
-    </>
-  );
+  const { id } = useParams();
+  // const [newData, setData] = usePostsContext();
+  const posts = useSelector((state) => state.posts);
+  console.log(posts);
+  // const data = newData.find((item) => item.id == id);
+  {
+    posts &&
+      posts.map((post) => {
+        return (
+          <>
+            <S.Wrapper>
+              <DetailTitle post={post} id={id} />
+              <DetailContent post={post} id={id} />
+            </S.Wrapper>
+            <DetailComment />
+          </>
+        );
+      });
+  }
 }
 
 export default TodoPage;
@@ -43,4 +50,3 @@ const S = {
   Wrapper,
   BigWrapper,
 };
-

@@ -1,12 +1,15 @@
 import { today, usePostsContext } from 'context/Posts';
 import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { MockPost } from '__mocks__/post';
 import DiaryList from './components/DiaryList/DiaryList';
 
 function HomePage() {
   const [data, setData] = usePostsContext();
+  const posts = useSelector((state)=>state.posts);
+  // console.log(posts);
   const [ref, inView] = useInView();
 
   const fetchNextPage = () => {

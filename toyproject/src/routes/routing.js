@@ -11,20 +11,12 @@ const router = createBrowserRouter([
     children: [
       {
         path: '',
-        element: <HomePage food='eat' />,
+        element: <HomePage />,
       },
       {
         path: '/todo/post/:id',
         element: <TodoPage />,
       },
-      // {
-      //   path: '/todo/:Maye/:gucci',
-      //   element: <TodoPage />,
-      // },
-      // {
-      //   path: '/todo/404/010',
-      //   element: <HomePage />,
-      // },
     ],
   },
 ]);
