@@ -5,13 +5,13 @@ import CardContent from './Diary/CardContent/cardContent';
 import CardTitle from './Diary/CardTitle/cardTitle';
 import Diary from './Diary/Diary';
 
-function DiaryList({ data }) {
+function DiaryList({ posts }) {
 
   return (
     <S.Wrapper>
-      {data.map((data, index) => {
+      {posts.map((post, index) => {
         return (
-          <Diary key={index} data={data} />
+          <Diary key={index} post={post} />
         );
       })}
     </S.Wrapper>

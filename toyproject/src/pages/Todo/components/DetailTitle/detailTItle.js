@@ -1,32 +1,32 @@
-import { DateGap, today } from 'context/Posts';
-import { days } from 'pages/Home/components/DiaryList/Diary/CardTitle/cardTitle';
-import { useState } from 'react';
+
+import { useRef } from 'react';
 import styled from 'styled-components';
 import { flexAlignCenter } from 'styles/common';
+import { DateGap, days, today } from 'utils/dateParse';
 
-function DetailTitle({ data }) {
-  const [parse, setParse] = useState(DateGap(today.getDate(), data.createdAt.getDate()));
+function DetailTitle({ post }) {
+  const parse = useRef(DateGap(today.getDate(), post.createdAt.getDate()));
   return (
     <S.Wrapper>
       <div>모두 공개</div>
       <div>
-        {data.User.nick_name}
-        {data.User.nick_name}
-        {data.User.nick_name}
+        {post.User.nick_name}
+        {post.User.nick_name}
+        {post.User.nick_name}
       </div>
       <TitleDetail>
         <div>
-          <img src={data.User.profile_img} />
-          <div>{data.User.nick_name}</div>
+          <img src={post.User.profile_img} />
+          <div>{post.User.nick_name}</div>
         </div>
-        {parse ? (
-          <div>{DateGap(today.getDate(), data.createdAt.getDate())}. </div>
+        {parse.current ? (
+          <div>{DateGap(today.getDate(), post.createdAt.getDate())}. </div>
         ) : (
           <div>
-            <div>{data.createdAt.getFullYear()}. </div>
-            <div>{data.createdAt.getMonth() + 1}. </div>
-            <div>{data.createdAt.getDate()}. </div>
-            <div>{days[data.createdAt.getDay()]}. </div>
+            <div>{post.createdAt.getFullYear()}. </div>
+            <div>{post.createdAt.getMonth() + 1}. </div>
+            <div>{post.createdAt.getDate()}. </div>
+            <div>{days[post.createdAt.getDay()]}. </div>
           </div>
         )}
       </TitleDetail>

@@ -6,9 +6,8 @@ import 'swiper/css/pagination';
 import styled from 'styled-components';
 import { faBriefcase } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { flexAlignCenter } from 'styles/common';
 
-function DetailContent({ data }) {
+function DetailContent({ post }) {
   return (
     <S.Wrapper>
       <S.SwiperWrapper>
@@ -23,7 +22,7 @@ function DetailContent({ data }) {
           modules={[Pagination]}
           className="mySwiper"
         >
-          {data.Post_img.map((src) => {
+          {post.Post_img.map((src) => {
             return (
               <SwiperSlide>
                 <img src={src} alt="" width={250} height={200} />
@@ -32,7 +31,7 @@ function DetailContent({ data }) {
           })}
         </Swiper>
       </S.SwiperWrapper>
-      <S.Content>{data.content}</S.Content>
+      <S.Content>{post.content}</S.Content>
       <S.ContentFooter1>
         친구들과 주변 선생님들에게 &lt;오늘의 일기&gt;를 소개해 주세요!
         <br />

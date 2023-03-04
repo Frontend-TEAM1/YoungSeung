@@ -7,12 +7,12 @@ import { flexCenter } from "styles/common";
 import CardContent from "./CardContent/cardContent";
 import CardTitle from "./CardTitle/cardTitle";
 
-function Diary({ data }) {
+function Diary({ post }) {
   return (
-    <StyledLink to={`/todo/post/${data.id}`}>
+    <StyledLink to={`/todo/post/${post.id}`}>
       <S.Card>
-        <CardTitle data={data} />
-        <CardContent data={data} />
+        <CardTitle post={post} />
+        <CardContent post={post} />
       </S.Card>
     </StyledLink>
   );

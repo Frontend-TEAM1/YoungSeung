@@ -1,35 +1,49 @@
-import { usePostsContext } from 'context/Posts';
-import { Posts } from 'pages/Home';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { ADD_COMMENT, DELETE_COMMENT, UPDATE_COMMENT } from 'store/post';
 import styled from 'styled-components';
 import DetailComment from './components/DetailComment/detailComment';
 import DetailContent from './components/DetailContent/detailContent';
 import DetailTitle from './components/DetailTitle/detailTItle';
 
 function TodoPage() {
-  // let { id } = useParams();
-  // console.log(id);
-
   const { id } = useParams();
-  // const [newData, setData] = usePostsContext();
   const posts = useSelector((state) => state.posts);
-  console.log(posts);
-  // const data = newData.find((item) => item.id == id);
-  {
-    posts &&
-      posts.map((post) => {
-        return (
-          <>
-            <S.Wrapper>
-              <DetailTitle post={post} id={id} />
-              <DetailContent post={post} id={id} />
-            </S.Wrapper>
-            <DetailComment />
-          </>
-        );
-      });
-  }
+  const post = posts.find((post) => (post.id = id));
+
+  const dispatch = useDispatch();
+
+  const addComment = (id, comment) => {
+    dispatch(ADD_COMMENT({ id, comment }));
+  };
+
+  const updateComment = (id, commentId, editComment) => {
+    dispatch(UPDATE_COMMENT({ id, commentId, editComment }));
+  };
+
+  const deleteComment = (id, commentId) => {
+    dispatch(DELETE_COMMENT({ id, commentId }));
+  };
+
+  return (
+    <>
+      {post && (
+        <>
+          <S.Wrapper>
+            <DetailTitle post={post} />
+            <DetailContent post={post} />
+          </S.Wrapper>
+          <DetailComment
+            post={post}
+            id={id}
+            addComment={addComment}
+            updateComment={updateComment}
+            deleteComment={deleteComment}
+          />
+        </>
+      )}
+    </>
+  );
 }
 
 export default TodoPage;

@@ -5,9 +5,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { flexAlignCenter } from 'styles/common';
 
-function CardContent({ data }) {
+function CardContent({ post }) {
   return (
     <S.Wrapper>
       <S.SwiperWrapper>
@@ -22,7 +21,7 @@ function CardContent({ data }) {
           modules={[Pagination]}
           className="mySwiper"
         >
-          {data.Post_img.map((src, index) => {
+          {post.Post_img.map((src, index) => {
             return (
               <SwiperSlide>
                 <img key={index} src={src} alt="" width={250} height={200} />
@@ -31,7 +30,7 @@ function CardContent({ data }) {
           })}
         </Swiper>
       </S.SwiperWrapper>
-      <div>{data.content}</div>
+      <div>{post.content}</div>
     </S.Wrapper>
   );
 }
