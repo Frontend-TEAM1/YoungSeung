@@ -23,6 +23,7 @@ const ContextQ1Page = () => {
   // const [isModalOpen, setIsModalOpen] = useState(false);
   const isModalOpen = useContext(ModalContext);
   const setIsModalOpen = useContext(SetModalContext)
+  console.log(isModalOpen);
 
   // 위의 상태를 전역으로 관리하여 ContextQ1Detail, ContextQ1Detail2 두 컴포넌트의 보이기 버튼이 눌려도 모달창이 열릴 수 있도록 해주세요 :)
 
