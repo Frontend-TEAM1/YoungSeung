@@ -39,7 +39,7 @@ function Comments({ comment, updateComment, deleteComment, id }) {
         <div>{comment.User.nick_name}</div>
       </S.Info>
       {editState ? (
-        <input onChange={onChangeEditContent} value={editComment} />
+        <input defaultValue={comment.content} />
       ) : (
         <div>{comment.content}</div>
       )}

@@ -1,5 +1,4 @@
-import { today, usePostsContext } from 'context/Posts';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useDispatch, useSelector } from 'react-redux';
 import { ADD_POST } from 'store/post';
@@ -28,9 +27,7 @@ function HomePage() {
     fetchNextPage();
   }, [inView]);
 
-  // console.log(data);
   /*MockPost 함수의 매개변수 count로 전달한 수 만큼 데이터가 생성됩니다*/
-  // console.log(String(Posts.createdAt));
 
   return (
     <>

@@ -1,8 +1,5 @@
-import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { flexCenter } from 'styles/common';
-import CardContent from './Diary/CardContent/cardContent';
-import CardTitle from './Diary/CardTitle/cardTitle';
 import Diary from './Diary/Diary';
 
 function DiaryList({ posts }) {
