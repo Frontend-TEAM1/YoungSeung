@@ -1,22 +1,19 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 const Comment = ({ comment, onDeleteComment, postId, onUpdateComment }) => {
   const [isCommentEditBtn, setIsCommentEditBtn] = useState(false);
-  const [editComment, setEditComment] = useState(comment.content);
+  const editComment = useRef();
   let editCommentBtn = isCommentEditBtn ? '완료' : '수정';
 
-  const onChangeEditComment = (e) => {
-    setEditComment(e.target.value);
-  };
 
   const onClickEditCommentBtn = () => {
     setIsCommentEditBtn(true);
   };
   const onCloseEditCommentBtn = () => {
-    if (comment.content === editComment) return setIsCommentEditBtn(false);
+    if (comment.content === editComment.current.value) return setIsCommentEditBtn(false);
     const id = postId;
     const commentId = comment.id;
-    const newComment = editComment;
+    const newComment = editComment.current.value;
     onUpdateComment(id, commentId, newComment);
     setIsCommentEditBtn(false);
   };
@@ -28,7 +25,7 @@ const Comment = ({ comment, onDeleteComment, postId, onUpdateComment }) => {
     >
       <h6>{comment.User.nickName}</h6>
       {isCommentEditBtn ? (
-        <textarea value={editComment} onChange={onChangeEditComment}></textarea>
+        <textarea ref={editComment} defaultValue={comment.content}></textarea>
       ) : (
         <p>{comment.content}</p>
       )}

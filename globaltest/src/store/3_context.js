@@ -16,7 +16,7 @@ const UserListReducer = (state, action) => {
     case 'ADD_BUTTON':
       return [
         ...state,
-        { id: state.length + 1, name: action.payload.name, nickname: action.payload.nickname },
+        { id: Math.floor(Math.random()*1000000000000000000), name: action.payload.name, nickname: action.payload.nickname },
       ];
     case 'ADD_STATUS_BUTTON':
       const newUserList = state.map(user=>{

@@ -3,9 +3,10 @@ import { createAction } from '../utils/createAction';
 export const IngredientsReducer = (state, action) => {
   switch (action.type) {
     case 'ADD_BUTTON':
+      console.log(state);
       return [
         ...state,
-        { id: state.length + 1, name: action.payload.name, price: action.payload.price },
+        { id: Math.floor(Math.random()*1000000000000000000), name: action.payload.name, price: action.payload.price },
       ];
     case 'DELETE_BUTTON':
       return state.filter((ingredient) => ingredient.id !== action.payload.id);

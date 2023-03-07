@@ -1,8 +1,12 @@
-import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import NavigateButton from '../../../../components/NavigateButton';
-import { ADD_COMMENT, ADD_POST, DELETE_COMMENT, DELETE_POST, UPDATE_COMMENT } from '../../../../store/4_redux';
-import { MockPosts } from '../../../../__mock__/mockPosts';
+import {
+  ADD_COMMENT,
+  ADD_POST,
+  DELETE_COMMENT,
+  DELETE_POST,
+  UPDATE_COMMENT,
+} from '../../../../store/4_redux';
 import PostForm from '../atom/Post/Form';
 import AllPosts from '../atom/Posts';
 

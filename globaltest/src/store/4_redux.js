@@ -5,7 +5,6 @@ import { MockPosts } from '../__mock__/mockPosts';
 
 const initialState = MockPosts(10);
 
-
 // 게시글 추가, 게시글 삭제, 게시글 수정
 
 export const ADD_POST = createAction('ADD_POST');

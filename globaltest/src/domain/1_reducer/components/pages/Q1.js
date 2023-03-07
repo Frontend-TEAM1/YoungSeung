@@ -1,7 +1,6 @@
-import React, { useState, useReducer } from 'react';
+import React, { useReducer } from 'react';
 import NavigateButton from '../../../../components/NavigateButton';
 import { ADD_BUTTON, DELETE_BUTTON, IngredientsReducer } from '../../../../store/1_reducer';
-import { createAction } from '../../../../utils/createAction';
 import Q1Form from '../atom/Form';
 import ReducerQ1List from '../atom/List';
 

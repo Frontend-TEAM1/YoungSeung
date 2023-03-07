@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { UPDATE_POST } from '../../../../../store/4_redux';
 import Comment from '../Comment/Comment';
@@ -7,20 +7,18 @@ import UserCard from '../UserCard/Card';
 
 const Post = ({ post, onDeletePost, onAddComment, onDeleteComment, onUpdateComment }) => {
   const [isContentEditBtn, setIsContentEditBtn] = useState(false);
-  const [editContent, setEditContent] = useState(post.content);
+  const editContent = useRef()
   const dispatch = useDispatch();
   let editContentBtn = isContentEditBtn ? '완료' : '수정';
 
   const onClickContentEditBtn = () => {
     setIsContentEditBtn(true);
   };
-  const onChangeEditContent = (e) => {
-    setEditContent(e.target.value);
-  };
+
   const onCloseEditContent = () => {
-    if (editContent === post.content) return setIsContentEditBtn(false);
+    if (editContent.current.value === post.content) return setIsContentEditBtn(false);
     const id = post.id;
-    const content = editContent;
+    const content = editContent.current.value;
     dispatch(UPDATE_POST({ id, content }));
     setIsContentEditBtn(false);
   };
@@ -41,7 +39,7 @@ const Post = ({ post, onDeletePost, onAddComment, onDeleteComment, onUpdateComme
         </button>
       )}
       {isContentEditBtn ? (
-        <textarea value={editContent} onChange={onChangeEditContent}></textarea>
+        <textarea ref={editContent} defaultValue={post.content}></textarea>
       ) : (
         <p>{post.content}</p>
       )}
