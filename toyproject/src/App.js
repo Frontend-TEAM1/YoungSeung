@@ -1,5 +1,3 @@
-import ScrollToTop from 'components/ScrollToTop/ScrollToTop';
-import ContextProvider from 'context/Posts';
 import { Provider } from 'react-redux';
 import { RouterProvider } from 'react-router-dom';
 import router from 'routes/routing';
@@ -14,10 +12,8 @@ function App() {
   return (
     <>
       <Provider store={store}>
-        <ContextProvider>
           <GlobalStyles />
           <RouterProvider router={router} />
-        </ContextProvider>
       </Provider>
     </>
   );
