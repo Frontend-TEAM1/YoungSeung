@@ -7,7 +7,7 @@ import { DateGap, days, today } from 'utils/dateParse';
 function Comments({ comment, updateComment, deleteComment, id }) {
   const parse = useRef(DateGap(today.getDate(), comment.createdAt.getDate()));
 
-  const [editComment, setEditComment] = useState(comment.content);
+  const editComment = useRef();
   const [editState, setEditState] = useState(false);
 
   const onClickEditBtn = () => {
@@ -15,14 +15,10 @@ function Comments({ comment, updateComment, deleteComment, id }) {
   };
 
   const onCloseEditBtn = () => {
-    if (comment.content === editComment) return setEditState(false);
+    if (comment.content === editComment.current.value) return setEditState(false);
     const commentId = comment.User.id;
-    updateComment(id, commentId, editComment);
+    updateComment(id, commentId, editComment.current.value);
     setEditState(false);
-  };
-
-  const onChangeEditContent = (e) => {
-    setEditComment(e.target.value);
   };
 
   const onDeleteBtn = () => {
@@ -39,7 +35,7 @@ function Comments({ comment, updateComment, deleteComment, id }) {
         <div>{comment.User.nick_name}</div>
       </S.Info>
       {editState ? (
-        <input defaultValue={comment.content} />
+        <input ref={editComment} defaultValue={comment.content} />
       ) : (
         <div>{comment.content}</div>
       )}
