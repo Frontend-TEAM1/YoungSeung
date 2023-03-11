@@ -5,29 +5,40 @@ function Login() {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
     reset,
     resetField,
   } = useForm();
-  const onsubmit = (data) => console.log(data);
+  const onValid = (data) => {
+    console.log(data)
+  };
+  const onInvalid = (error) => {
+    console.log(error)
+    resetField('password');
+  };
+  console.log(errors);
 
+  console.log(watch('email'));
   return (
-    <form onSubmit={handleSubmit(onsubmit)}>
-      <label htmlFor="email">이메일</label>
+    <form onSubmit={handleSubmit(onValid, onInvalid)}>
       <input
         id="email"
-        type="email"
-        name="email"
         placeholder="test@email.com"
-        {...register('email')}
+        {...register('email', {
+          required: '이메일을 입력해주세요',
+          minLength: { value: 5, message: '5글자이상 입력해주세요' },
+        })}
       />
-      <label htmlFor="password">비밀번호</label>
+      {errors.email?.message}
       <input
         id="password"
-        type="password"
-        name="password"
         placeholder="****************"
-        {...register('password')}
+        {...register('password', {
+          required: '비밀번호 입력해주세요',
+          minLength: { value: 5, message: '5글자 이상 입력해주세요' },
+        })}
       />
+      {errors.password?.message}
       <button type="submit">로그인</button>
     </form>
   );
