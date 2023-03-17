@@ -1,0 +1,16 @@
+const { Axios } = require('./core');
+
+const PATH = `/repos/angular/angular-cli/issues`;
+
+const ListApi = {
+	getList(issue) {
+		return Axios.get(PATH, {
+			params: {
+				per_page: issue.perPage,
+				page: issue.offset,
+			},
+		});
+	},
+};
+
+export default ListApi;
