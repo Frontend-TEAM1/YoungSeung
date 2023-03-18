@@ -8,6 +8,7 @@ const ListApi = {
 			params: {
 				per_page: issue.perPage,
 				page: issue.offset,
+				sort: issue.sortState,
 			},
 		});
 	},

@@ -2,34 +2,35 @@ import styled from 'styled-components';
 import { flexCenter } from 'styles/common';
 import PageNumber from './PageNumber/PageNumber';
 
-function Pagination({ perPage, totalIssue, offset, setOffset, pageNum }) {
-	const onClickNextPage = () => {
-		setOffset(offset + 1);
-	};
-	const onClickPrevPage = () => {
-		setOffset(offset - 1);
-	};
-
-	const onClickTargetPage = e => {
-		setOffset(Number(e.target.innerText));
-	};
-	console.log(pageNum);
+function Pagination({
+	offset,
+	setOffset,
+	pageNum,
+	pageArr,
+	pageArrIndex,
+	onClickNextPage,
+	onClickPrevPage,
+	onClickInit,
+	onClickLast,
+}) {
 	return (
 		<S.Wrapper>
-			<button>[맨처음]</button>
-			{pageNum && (
+			<button onClick={onClickInit} disabled={pageNum && offset === pageNum[0]}>
+				[맨처음]
+			</button>
+			{pageArr[pageArrIndex] && (
 				<>
 					<button onClick={onClickPrevPage} disabled={offset === pageNum[0]}>
 						[이전]
 					</button>
 					<S.PageNumWrapper>
-						{pageNum.map((num, idx) => {
+						{pageArr[pageArrIndex].map((num, idx) => {
 							return (
 								<PageNumber
 									key={idx}
 									num={num}
 									offset={offset}
-									onClickTargetPage={onClickTargetPage}
+									setOffset={setOffset}
 								/>
 							);
 						})}
@@ -42,7 +43,12 @@ function Pagination({ perPage, totalIssue, offset, setOffset, pageNum }) {
 					</button>
 				</>
 			)}
-			<button>[맨끝]</button>
+			<button
+				onClick={onClickLast}
+				disabled={pageNum && offset === pageNum.length}
+			>
+				[맨끝]
+			</button>
 		</S.Wrapper>
 	);
 }

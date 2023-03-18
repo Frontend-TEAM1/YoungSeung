@@ -1,9 +1,13 @@
 import styled from 'styled-components';
 
-function PageNumber({ num, offset, onClickTargetPage }) {
+function PageNumber({ num, offset, setOffset }) {
+	const onClickTargetPage = e => {
+		if (e.target.innerText === `[${num}]`) return;
+		setOffset(Number(e.target.innerText));
+	};
 	return (
 		<S.PageNum onClick={onClickTargetPage}>
-			{num === offset ? `[${num}]` : num}
+			{num === offset ? `[ ${num} ]` : num}
 		</S.PageNum>
 	);
 }

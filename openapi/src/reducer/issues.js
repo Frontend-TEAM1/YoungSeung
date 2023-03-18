@@ -49,7 +49,6 @@ export const issueSlice = createSlice({
 
 export const getIssues = createAsyncThunk('issue/getIssues', async issue => {
 	const res = await ListApi.getList(issue);
-	console.log(res.data);
 	return res.data;
 });
 
