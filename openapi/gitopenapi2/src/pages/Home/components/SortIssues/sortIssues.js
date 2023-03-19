@@ -9,6 +9,7 @@ function SortIssues({
 	sortState,
 	onClickSortState,
 	searchParams,
+	setSearchParams,
 	setSortState,
 }) {
 	useEffect(() => {

@@ -2,16 +2,14 @@ import { Axios } from './core';
 
 const PATH = `/repos/angular/angular-cli/issues`;
 
-const ListApi = {
-	getList(issue) {
+const IssueApi = {
+	getIssue(issue) {
 		return Axios.get(PATH, {
 			params: {
-				per_page: issue.perPage,
-				page: issue.offset,
-				sort: issue.sortState,
+				issue_number: issue,
 			},
 		});
 	},
 };
 
-export default ListApi;
+export default IssueApi;

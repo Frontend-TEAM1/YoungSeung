@@ -3,14 +3,13 @@ import styled from 'styled-components';
 import Issue from './Issue/Issue';
 
 function IssueList({ issues }) {
+	// console.log(issues.length);
 	return (
 		issues &&
 		issues.map((issue, idx) => (
-			<S.IssueWrap>
-				<S.StyledLink key={idx} to={`/detail/${issue.id}`}>
-					<Issue issue={issue} />
-				</S.StyledLink>
-			</S.IssueWrap>
+			<S.StyledLink key={idx} to={`/detail/${issue.id}`}>
+				<Issue issue={issue} />
+			</S.StyledLink>
 		))
 	);
 }
@@ -21,14 +20,6 @@ const StyledLink = styled(Link)`
 	text-decoration: none;
 	color: ${({ theme }) => theme.palette.black};
 `;
-
-const IssueWrap = styled.div`
-	width: 50%;
-	min-height: 10vh;
-	margin: 0 auto;
-`;
-
 const S = {
 	StyledLink,
-	IssueWrap,
 };

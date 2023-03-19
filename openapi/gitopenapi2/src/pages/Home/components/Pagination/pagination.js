@@ -12,9 +12,6 @@ function Pagination({
 	onClickPrevPage,
 	onClickInit,
 	onClickLast,
-	setSearchParams,
-	sortState,
-	perPage,
 }) {
 	return (
 		<S.Wrapper>
@@ -34,9 +31,6 @@ function Pagination({
 									num={num}
 									offset={offset}
 									setOffset={setOffset}
-									setSearchParams={setSearchParams}
-									sortState={sortState}
-									perPage={perPage}
 								/>
 							);
 						})}

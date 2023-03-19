@@ -24,8 +24,6 @@ function HomePage() {
 	const loading = useSelector(state => state.issue.getTodoState.loading);
 	const dispatch = useDispatch();
 
-	window.scrollTo(0, 0);
-
 	useEffect(() => {
 		dispatch(
 			getIssues({
@@ -56,23 +54,24 @@ function HomePage() {
 
 		if (offset <= 10 * pageArrIndex && offset % 10 == 0)
 			return setPageArrIndex(pageArrIndex - 1);
+		// setSearchParams({ perpage: perPage, page: offset, sort: sortState });
+		// const paramOffset = parseInt(searchParams.get('page'));
+		// console.log(paramOffset);
+		// if (offset !== paramOffset) return setOffset(paramOffset);
+		// const paramOffset = parseInt(searchParams.get('page'));
+		// console.log(1);
+		// if (offset !== paramOffset) return setOffset(paramOffset);
 	}, [offset]);
-
-	useEffect(() => {
-		const page = searchParams.get('page');
-		if (page > 10) return setPageArrIndex(1);
-		if (page <= 10) return setPageArrIndex(0);
-	}, [searchParams]);
 
 	useEffect(() => {
 		const paramOffSet = parseInt(searchParams.get('page'));
 		if (offset === paramOffSet) return;
 		setOffset(paramOffSet);
-	}, [searchParams, offset]);
+	}, [offset]);
 
 	const onClickPerPage = number => {
 		setPerPage(number);
-		setSearchParams({ perpage: number, page: 1, sort: sortState });
+		setSearchParams({ perpage: number, page: offset, sort: sortState });
 	};
 
 	const onClickSortState = state => {
@@ -88,6 +87,8 @@ function HomePage() {
 			page: paramOffset + 1,
 			sort: sortState,
 		});
+		// if (offset === paramOffset) return;
+		// setOffset(paramOffset);
 	};
 	const onClickPrevPage = () => {
 		const paramOffset = parseInt(searchParams.get('page'));
@@ -100,23 +101,14 @@ function HomePage() {
 	};
 
 	const onClickInit = () => {
-		setSearchParams({
-			perpage: perPage,
-			page: pageNum[0],
-			sort: sortState,
-		});
+		setOffset(pageNum[0]);
 		setPageArrIndex(0);
 	};
 
 	const onClickLast = () => {
-		setSearchParams({
-			perpage: perPage,
-			page: pageNum.length,
-			sort: sortState,
-		});
+		setOffset(pageNum.length);
 		setPageArrIndex(pageArr.length - 1);
 	};
-
 	return (
 		<>
 			{loading && <LoadPage />}
@@ -144,9 +136,6 @@ function HomePage() {
 					onClickPrevPage={onClickPrevPage}
 					onClickInit={onClickInit}
 					onClickLast={onClickLast}
-					setSearchParams={setSearchParams}
-					perPage={perPage}
-					sortState={sortState}
 				/>
 			)}
 		</>

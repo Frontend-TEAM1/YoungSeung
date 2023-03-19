@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { flexCenter } from 'styles/common';
 
 function Issue({ issue }) {
+	// console.log(issue);
 	return (
 		<S.IssueWrapper>
 			<S.IssueHeader>
@@ -26,10 +27,11 @@ const IssueWrapper = styled.div`
 	border: 1px solid black;
 	border-radius: 10px;
 	box-shadow: 0 5px 18px -10px rgba(0, 0, 0, 0.7);
-	margin: calc(${({ theme }) => theme.margin.xxLarge}*5) auto;
+	margin: ${({ theme }) => theme.margin.xxLarge} auto;
 	${flexCenter}
 	flex-direction: column;
-	background-color: azure;
+	width: 90%;
+	min-height: 10vh;
 `;
 
 const IssueHeader = styled.div`

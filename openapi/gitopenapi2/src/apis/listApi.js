@@ -1,4 +1,4 @@
-import { Axios } from './core';
+const { Axios } = require('./core');
 
 const PATH = `/repos/angular/angular-cli/issues`;
 
