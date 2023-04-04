@@ -145,3 +145,7 @@ react-query를 사용하니 한층 편해지는게 느껴진다
 https://lyrical-brain-e0f.notion.site/6-0dca9be80d294cb2a2c8a70720991a2b
 
 현재 axios요청에서 문제가 있는데 해결중..
+
+## 2023-04-04
+
+react-hook-form 활용해서 로그인 validation
